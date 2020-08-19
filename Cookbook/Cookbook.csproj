@@ -64,24 +64,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model.cs">
+    <Compile Include="Model\Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblIngredient.cs">
+    <Compile Include="Model\tblIngredient.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblPerson.cs">
+    <Compile Include="Model\tblPerson.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblRecipe.cs">
+    <Compile Include="Model\tblRecipe.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblShoppingList.cs">
+    <Compile Include="Model\tblShoppingList.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -89,18 +89,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model.Context.cs">
+    <Compile Include="Model\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.Designer.cs">
+    <Compile Include="Model\Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -122,11 +122,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model.edmx">
+    <EntityDeploy Include="Model\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model.edmx.diagram">
+    <None Include="Model\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -139,12 +139,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model.Context.tt">
+    <Content Include="Model\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <Content Include="Model.tt">
+    <Content Include="Model\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
@@ -156,10 +156,8 @@
   <ItemGroup>
     <Folder Include="Command\" />
     <Folder Include="DataAccess\" />
-    <Folder Include="Model\" />
     <Folder Include="Validation\" />
     <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

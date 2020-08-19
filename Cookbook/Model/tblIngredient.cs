@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cookbook
+namespace Cookbook.Model
 {
     using System;
     using System.Collections.Generic;
