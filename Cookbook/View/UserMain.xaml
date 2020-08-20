@@ -34,7 +34,7 @@
                             <DataGridTemplateColumn Header="Delete">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="btnDeleteEmployee"
+                                        <Button Name="btnDeleteRecipe"
                                         Command="{Binding DataContext.DeleteRecipe, RelativeSource={RelativeSource FindAncestor,
                                     AncestorType={x:Type Window}},UpdateSourceTrigger=PropertyChanged}" Content="Delete"/>
                                     </DataTemplate>

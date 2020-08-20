@@ -1,4 +1,5 @@
 ﻿using Cookbook.Model;
+using Cookbook.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Cookbook.View
     {
         public AddRecipeView(tblPerson person)
         {
+            DataContext = new AddRecipeViewModel(this,person);
             InitializeComponent();
         }
     }

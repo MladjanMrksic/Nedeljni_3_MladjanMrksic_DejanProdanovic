@@ -17,13 +17,13 @@ using System.Windows.Shapes;
 namespace Cookbook.View
 {
     /// <summary>
-    /// Interaction logic for UpdateRecipeView.xaml
+    /// Interaction logic for AddIngredientsView.xaml
     /// </summary>
-    public partial class UpdateRecipeView : Window
+    public partial class AddIngredientsView : Window
     {
-        public UpdateRecipeView(tblRecipe recipe)
+        public AddIngredientsView(tblRecipe recipe)
         {
-            DataContext = new UpdateRecipeViewModel(this, recipe);
+            DataContext = new AddIngredientsViewModel(this, recipe);
             InitializeComponent();
         }
     }

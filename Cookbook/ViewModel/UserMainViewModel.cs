@@ -20,6 +20,8 @@ namespace Cookbook.ViewModel
         {
             view = um;
             User = p;
+            RecipeList = recipeService.GetAllRecipes();
+            Recipe = new tblRecipe();
         }
 
         private List<tblRecipe> recipeList;
@@ -116,10 +118,11 @@ namespace Cookbook.ViewModel
         }
         private bool CanUpdateRecipeExecute()
         {
-            if (Recipe.tblPerson.PersonID == User.PersonID)
-                return true;
-            else
-                return false;
+            //if (Recipe.tblPerson.PersonID == User.PersonID)
+            //    return true;
+            //else
+            //    return false;
+            return true;
         }
 
         private ICommand addRecipe;

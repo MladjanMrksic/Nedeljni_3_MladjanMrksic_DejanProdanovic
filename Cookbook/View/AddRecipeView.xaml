@@ -5,8 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cookbook.View"
         mc:Ignorable="d"
-        Title="AddRecipeView" Height="450" Width="800">
+        Title="Add recipe" Height="450" Width="800" Background="Orange" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Border Background="#2e3137" CornerRadius="20" Margin="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="6"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" Grid.Row="1" Name="lblRecipeName" Content="Recipe Name" HorizontalAlignment="Right"/>
+                <Label Grid.Column="1" Grid.Row="3" Name="lblRecipeType" Content="Recipe Type" HorizontalAlignment="Right"/>
+                <Label Grid.Column="1" Grid.Row="5" Name="lblIntendedFor" Content="Intended For" HorizontalAlignment="Right"/>
+                <Label Grid.Column="1" Grid.Row="7" Name="lblDescription" Content="Description" HorizontalAlignment="Right"/>
+
+
+
+                <TextBox Grid.Column="3" Grid.Row="1" Width="auto" Height="20" Name="txtRecipeName" Text="{Binding Recipe.RecipeName, UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox Grid.Column="3" Grid.Row="3" Width="auto" Height="20" Name="cmbRecipeType" Text="{Binding Recipe.RecipeType, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBoxItem>Appetizer</ComboBoxItem>
+                    <ComboBoxItem>Meal</ComboBoxItem>
+                    <ComboBoxItem>Dessert</ComboBoxItem>
+                </ComboBox>
+                <TextBox Grid.Column="3" Grid.Row="5" Width="auto" Height="20" Name="txtIntendedFor" Text="{Binding Recipe.IntendedFor, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="3" Grid.Row="7" Width="auto" Height="100" Name="txtDesciption" Text="{Binding Recipe.Description, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Grid.Column="3" Grid.Row="9" Width="auto" Height="20" Name="btnAddIngredients" Content="Add Ingredients" Command="{Binding AddIngredients, UpdateSourceTrigger=PropertyChanged}"/>
+                <StackPanel Grid.Column="3" Grid.Row="21" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Save" Name="btnSave" Height="20" Width="70" HorizontalAlignment="Left" 
+                    Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Close" Name="btnClose" Height="20" Width="70" HorizontalAlignment="Right"
+                    Command="{Binding Close, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

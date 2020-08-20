@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Cookbook.Model;
 
 namespace Cookbook.DataAccess
@@ -46,9 +47,14 @@ namespace Cookbook.DataAccess
             {
                 using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
                 {
+                    List < tblIngredient > list = (from x in context.tblIngredients where x.tblRecipe.RecipeID == ID select x).ToList();
+                    foreach (var i in list)
+                    {
+                        context.tblIngredients.Remove(i);
+                    }
                     context.tblRecipes.Remove((from x in context.tblRecipes
                                                where x.RecipeID == ID
-                                               select x).First());
+                                               select x).FirstOrDefault());                    
                     context.SaveChanges();
                 }
             }
@@ -104,6 +110,7 @@ namespace Cookbook.DataAccess
                                         select x).First();
                     recipe = Updated;
                     context.SaveChanges();
+                    MessageBox.Show("Recipe successfully updated!", "Updated", MessageBoxButton.OK, MessageBoxImage.Information);
                     return recipe;
                 }
             }
