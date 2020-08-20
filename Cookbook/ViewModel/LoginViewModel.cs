@@ -125,7 +125,12 @@ namespace Cookbook.ViewModel
             }
             else
             {
-                UserMain main = new UserMain();
+                tblPerson p;
+                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                {
+                    p = (from x in context.tblPersons where x.Username == UserName select x).First();
+                }
+                UserMain main = new UserMain(p);
                 main.Show();
 
                 view.Close();

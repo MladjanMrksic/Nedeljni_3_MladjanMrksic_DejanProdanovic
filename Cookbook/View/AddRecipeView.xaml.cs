@@ -1,5 +1,4 @@
 ﻿using Cookbook.Model;
-using Cookbook.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +16,12 @@ using System.Windows.Shapes;
 namespace Cookbook.View
 {
     /// <summary>
-    /// Interaction logic for UserMain.xaml
+    /// Interaction logic for AddRecipeView.xaml
     /// </summary>
-    public partial class UserMain : Window
+    public partial class AddRecipeView : Window
     {
-        public UserMain(tblPerson person)
+        public AddRecipeView(tblPerson person)
         {
-            DataContext = new UserMainViewModel(this, person);
             InitializeComponent();
         }
     }

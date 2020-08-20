@@ -51,3 +51,18 @@ Owned bit default(0),
 Recipe int FOREIGN KEY REFERENCES tblRecipe(RecipeID),
 Person int FOREIGN KEY REFERENCES tblPerson(PersonID)
 )
+
+USE CookbookDatabase
+GO
+
+INSERT INTO tblIngredients (IngredientName) VALUES ('Milk')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Salt')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Sugar')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Tomato')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Mayonnaise')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Mushroom')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Ketchup')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Cheese')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Egg')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Ham')
+INSERT INTO tblIngredients (IngredientName) VALUES ('Flour')

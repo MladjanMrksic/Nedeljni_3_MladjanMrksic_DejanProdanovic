@@ -67,7 +67,7 @@ namespace Cookbook.ViewModel
                 service.AddUser(User);
 
 
-                UserMain main = new UserMain();
+                UserMain main = new UserMain(User);
                 main.Show();
 
                 view.Close();

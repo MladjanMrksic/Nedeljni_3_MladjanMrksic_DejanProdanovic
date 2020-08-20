@@ -66,15 +66,26 @@
     </ApplicationDefinition>
     <Compile Include="DataAccess\IRecipeService.cs" />
     <Compile Include="DataAccess\RecipeService.cs" />
+    <Compile Include="ViewModel\UserMainViewModel.cs" />
+    <Compile Include="View\AddRecipeView.xaml.cs">
+      <DependentUpon>AddRecipeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AdminMainView.xaml.cs">
       <DependentUpon>AdminMainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FirstLogin.xaml.cs">
       <DependentUpon>FirstLogin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UpdateRecipeView.xaml.cs">
+      <DependentUpon>UpdateRecipeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserMain.xaml.cs">
       <DependentUpon>UserMain.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddRecipeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AdminMainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +147,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\UpdateRecipeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
