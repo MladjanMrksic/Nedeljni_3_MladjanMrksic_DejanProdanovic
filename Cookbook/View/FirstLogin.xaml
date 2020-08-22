@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Cookbook.View"
         mc:Ignorable="d"
         Title="FirstLogin"
-        Height="400"
+            Height="400"
         Width="300"
         FontSize="14"
         Background="#2e3137"

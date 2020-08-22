@@ -87,6 +87,11 @@ namespace Cookbook.ViewModel
                 MessageBox.Show("Wrong user name or password");
                 return;
             }
+            if (UserName.Equals("Admin") && !encryptedString.Equals("Admin123"))
+            {
+                MessageBox.Show("Wrong password for Admin");
+                return;
+            }
 
             if (UserName.Equals("Admin") && encryptedString.Equals("Admin123"))
             {
@@ -98,22 +103,22 @@ namespace Cookbook.ViewModel
                     tblPerson admin = new tblPerson();
                     admin.Username = UserName;
                     admin.Password = password;
-                    personService.AddUser(admin);
-                    AdminMainView adminMain = new AdminMainView();
+                    adminInDb = personService.AddUser(admin);
+                    AdminMainView adminMain = new AdminMainView(adminInDb);
                     adminMain.Show();
                     view.Close();
                     return;
                 }
                 else
                 {
-                    AdminMainView adminMain = new AdminMainView();
+                    AdminMainView adminMain = new AdminMainView(adminInDb);
                     adminMain.Show();
                     view.Close();
                     return;
                 }
 
             }
-            tblPerson userInDb = personService.GetUserByUserNameAndPass(UserName, password);
+            tblPerson userInDb = personService.GetUserByUserName(UserName);
 
 
             if (userInDb == null)
@@ -125,8 +130,13 @@ namespace Cookbook.ViewModel
             }
             else
             {
+                if (!userInDb.Password.Equals(password))
+                {
+                    MessageBox.Show("Wrong password for this user");
+                    return;
+                }
                 tblPerson p;
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
                     p = (from x in context.tblPersons where x.Username == UserName select x).First();
                 }
@@ -136,8 +146,6 @@ namespace Cookbook.ViewModel
                 view.Close();
                 return;
             }
-
-
 
         }
     }

@@ -13,10 +13,10 @@ namespace Cookbook.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CookbookDatabaseEntities : DbContext
+    public partial class CookbookDatabaseEntities1 : DbContext
     {
-        public CookbookDatabaseEntities()
-            : base("name=CookbookDatabaseEntities")
+        public CookbookDatabaseEntities1()
+            : base("name=CookbookDatabaseEntities1")
         {
         }
     
@@ -28,6 +28,6 @@ namespace Cookbook.Model
         public virtual DbSet<tblIngredient> tblIngredients { get; set; }
         public virtual DbSet<tblPerson> tblPersons { get; set; }
         public virtual DbSet<tblRecipe> tblRecipes { get; set; }
-        public virtual DbSet<tblShoppingList> tblShoppingLists { get; set; }
+        public virtual DbSet<vwRecipe> vwRecipes { get; set; }
     }
 }

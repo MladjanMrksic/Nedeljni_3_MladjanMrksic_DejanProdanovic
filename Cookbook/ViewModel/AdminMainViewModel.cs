@@ -12,11 +12,11 @@ using System.Windows.Input;
 
 namespace Cookbook.ViewModel
 {
-    class UserMainViewModel : ViewModelBase
+    class AdminMainViewModel:ViewModelBase
     {
-        UserMain view;
+        AdminMainView view;
         RecipeService recipeService = new RecipeService();
-        public UserMainViewModel(UserMain um, tblPerson p)
+        public AdminMainViewModel(AdminMainView um, tblPerson p)
         {
             view = um;
             User = p;
@@ -129,17 +129,16 @@ namespace Cookbook.ViewModel
         }
         private bool CanUpdateRecipeExecute()
         {
+
+
             if (Recipe == null)
             {
                 return false;
             }
-            else if (Recipe.PersonID == User.PersonID || User.Username.Equals("Admin"))
+            else
             {
                 return true;
             }
-
-            else
-                return false;
         }
 
         private ICommand addRecipe;

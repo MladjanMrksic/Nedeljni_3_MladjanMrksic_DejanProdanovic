@@ -10,22 +10,15 @@ namespace Cookbook.DataAccess
 {
     class IngredientService
     {
-        public tblIngredient AddIngredient(tblIngredient ingredient)
+
+        public List<tblIngredient> GetAllIngredients()
         {
             try
             {
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
-
-                    tblIngredient newIngredient = new tblIngredient();
-                    newIngredient.IngredientName = ingredient.IngredientName;
-                    newIngredient.tblRecipe = ingredient.tblRecipe;
-
-                    context.tblIngredients.Add(newIngredient);
-                    context.SaveChanges();
-                    MessageBox.Show("Ingredient successfully added to recipe!", "Added", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return newIngredient;
-
+                    return (from x in context.tblIngredients
+                            select x).ToList();
                 }
             }
             catch (Exception ex)
@@ -34,15 +27,15 @@ namespace Cookbook.DataAccess
                 return null;
             }
         }
-
-        public List<tblIngredient> GetAllIngredients()
+        public tblIngredient GetIngredientByName(string name)
         {
             try
             {
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
                     return (from x in context.tblIngredients
-                            select x).ToList();
+                            where x.IngredientName.Equals(name)
+                            select x).First();
                 }
             }
             catch (Exception ex)

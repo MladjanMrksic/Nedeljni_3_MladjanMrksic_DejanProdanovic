@@ -5,8 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cookbook.View"
         mc:Ignorable="d"
-        Title="AdminMainView" Height="450" Width="800">
+        Title="AdminMainView"  Height="450" Width="800" 
+        Background="Orange"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Border Background="#2e3137" CornerRadius="20" Margin="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" Grid.Row="3" Height="auto" Width="auto">
+                    <DataGrid Name="DataGridRecipes" ItemsSource="{Binding RecipeList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Recipe, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
+                      AutoGenerateColumns="False" HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
+                      FontWeight="Bold">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Recipe Name" Binding="{Binding RecipeName}"/>
+                            <DataGridTextColumn Header="Recipe Type" Binding="{Binding RecipeType}"/>
+                            <DataGridTextColumn Header="Intended for" Binding="{Binding IntendedFor}"/>
+                            <DataGridTextColumn Header="Creation date"  Binding="{Binding DateCreated, 
+                                                                        StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                            <DataGridTextColumn Header="Author"  Binding="{Binding Username}"/>
+                            <DataGridTextColumn Header="Author" Binding="{Binding Username}"/>
+                            <DataGridTemplateColumn Header="Delete">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="btnDeleteRecipe"
+                                        Command="{Binding DataContext.DeleteRecipe, RelativeSource={RelativeSource FindAncestor,
+                                    AncestorType={x:Type Window}},UpdateSourceTrigger=PropertyChanged}" Content="Delete"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Update">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="btnUpdateEmployee"
+                                        Command="{Binding DataContext.UpdateRecipe, RelativeSource={RelativeSource FindAncestor,
+                                    AncestorType={x:Type Window}},UpdateSourceTrigger=PropertyChanged}" Content="Update"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                    <Button Name="btnAddRecipe" Content="Add Recipe" Width="Auto" Height="20" HorizontalAlignment="Left" Margin="0,0,20,0"
+                Command="{Binding AddRecipe, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                    <Button Name="btnLogout" Content="Logout" Width="Auto" Height="20" HorizontalAlignment="Right" Margin="0,0,20,0"
+                Command="{Binding Logout, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

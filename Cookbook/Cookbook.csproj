@@ -67,8 +67,36 @@
     <Compile Include="DataAccess\IngredientService.cs" />
     <Compile Include="DataAccess\IRecipeService.cs" />
     <Compile Include="DataAccess\RecipeService.cs" />
+    <Compile Include="Model\CookbookDataBaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CookbookDataBaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CookbookDataBaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CookbookDataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CookbookDataBaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CookbookDataBaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblIngredient.cs">
+      <DependentUpon>CookbookDataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblPerson.cs">
+      <DependentUpon>CookbookDataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblRecipe.cs">
+      <DependentUpon>CookbookDataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\vwRecipe.cs">
+      <DependentUpon>CookbookDataBaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AddIngredientsViewModel.cs" />
     <Compile Include="ViewModel\AddRecipeViewModel.cs" />
+    <Compile Include="ViewModel\AdminMainViewModel.cs" />
     <Compile Include="ViewModel\UpdateRecipeViewModel.cs" />
     <Compile Include="ViewModel\UserMainViewModel.cs" />
     <Compile Include="View\AddIngredientsView.xaml.cs">
@@ -120,33 +148,6 @@
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="DataAccess\IPersonService.cs" />
     <Compile Include="DataAccess\PersonService.cs" />
-    <Compile Include="Model\Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\tblIngredient.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\tblPerson.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\tblRecipe.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\tblShoppingList.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Validation\EncryptionHelper.cs" />
     <Compile Include="ViewModel\FirstLoginViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -185,12 +186,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\Model.edmx">
+    <EntityDeploy Include="Model\CookbookDataBaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>CookbookDataBaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <None Include="Model\CookbookDataBaseModel.edmx.diagram">
+      <DependentUpon>CookbookDataBaseModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -204,17 +205,16 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Model\Model.Context.tt">
+    <Content Include="Model\CookbookDataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>CookbookDataBaseModel.edmx</DependentUpon>
+      <LastGenOutput>CookbookDataBaseModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\Model.tt">
+    <Content Include="Model\CookbookDataBaseModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
+      <DependentUpon>CookbookDataBaseModel.edmx</DependentUpon>
+      <LastGenOutput>CookbookDataBaseModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -54,9 +54,18 @@
                     <ComboBoxItem>Meal</ComboBoxItem>
                     <ComboBoxItem>Dessert</ComboBoxItem>
                 </ComboBox>
-                <TextBox Grid.Column="3" Grid.Row="5" Width="auto" Height="20" Name="txtIntendedFor" Text="{Binding Recipe.IntendedFor, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="3" Grid.Row="7" Width="auto" Height="100" Name="txtDesciption" Text="{Binding Recipe.Description, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button Grid.Column="3" Grid.Row="9" Width="auto" Height="20" Name="btnAddIngredients" Content="Update Ingredients" Command="{Binding AddIngredients, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="3" Grid.Row="5" 
+                         Width="auto" Height="20" 
+                         Name="txtIntendedFor" 
+                         Text="{Binding Recipe.IntendedFor, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="3" 
+                         Grid.Row="7"
+                         Width="auto"
+                         Height="100" 
+                         Name="txtDesciption"
+                         Text="{Binding Recipe.Description, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Grid.Column="3" Grid.Row="9" Width="auto" Height="20" Name="btnAddIngredients" Content="Update Ingredients"
+                        Command="{Binding AddIngredients, UpdateSourceTrigger=PropertyChanged}"/>
                 <StackPanel Grid.Column="3" Grid.Row="21" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="Save" Name="btnSave" Height="20" Width="70" HorizontalAlignment="Left" 
                     Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"/>

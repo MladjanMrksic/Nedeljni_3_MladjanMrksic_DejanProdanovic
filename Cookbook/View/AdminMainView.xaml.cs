@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Cookbook.Model;
+using Cookbook.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,11 @@ namespace Cookbook.View
         public AdminMainView()
         {
             InitializeComponent();
+        }
+        public AdminMainView(tblPerson person)
+        {
+            InitializeComponent();
+            DataContext = new AdminMainViewModel(this, person);
         }
     }
 }

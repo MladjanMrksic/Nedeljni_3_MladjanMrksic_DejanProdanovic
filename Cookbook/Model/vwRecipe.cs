@@ -12,16 +12,17 @@ namespace Cookbook.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class tblShoppingList
+    public partial class vwRecipe
     {
-        public int IngredientID { get; set; }
-        public string IngredientName { get; set; }
-        public Nullable<int> Ammount { get; set; }
-        public Nullable<bool> Owned { get; set; }
-        public Nullable<int> Recipe { get; set; }
-        public Nullable<int> Person { get; set; }
-    
-        public virtual tblPerson tblPerson { get; set; }
-        public virtual tblRecipe tblRecipe { get; set; }
+        public int RecipeID { get; set; }
+        public string RecipeName { get; set; }
+        public string RecipeType { get; set; }
+        public Nullable<int> IntendedFor { get; set; }
+        public string Description { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
+        public int PersonID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Username { get; set; }
     }
 }
