@@ -16,21 +16,28 @@ namespace Cookbook.DataAccess
             {
                 using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
                 {
-                    tblRecipe newRecipe = new tblRecipe
-                    {
-                        RecipeName = recipe.RecipeName,
-                        RecipeType = recipe.RecipeType,
-                        IntendedFor = recipe.IntendedFor,
-                        Author = recipe.Author,
-                        Description = recipe.Description,
-                        DateCreated = recipe.DateCreated,
-                        tblIngredients = recipe.tblIngredients,
-                        tblPerson = recipe.tblPerson,
-                        tblShoppingLists = recipe.tblShoppingLists
-                    };
+                    tblRecipe newRecipe = new tblRecipe();
+                    newRecipe.RecipeName = recipe.RecipeName;
+                    newRecipe.RecipeType = recipe.RecipeType;
+                    newRecipe.IntendedFor = recipe.IntendedFor;
+                    newRecipe.Description = recipe.Description;
+                    newRecipe.DateCreated = DateTime.Now;
+                    newRecipe.tblPerson = recipe.tblPerson;
+                    newRecipe.Author = recipe.tblPerson.PersonID;
+                    //{
+                    //    RecipeName = recipe.RecipeName,
+                    //    RecipeType = recipe.RecipeType,
+                    //    IntendedFor = recipe.IntendedFor,
+                    //    Author = recipe.Author,
+                    //    Description = recipe.Description,
+                    //    DateCreated = recipe.DateCreated,
+                    //    //tblIngredients = recipe.tblIngredients,
+                    //    tblPerson = recipe.tblPerson,
+                    //    //tblShoppingLists = recipe.tblShoppingLists
+                    //};
                     context.tblRecipes.Add(newRecipe);
                     context.SaveChanges();
-
+                    MessageBox.Show("Recipe successfully added to recipe!", "Added", MessageBoxButton.OK, MessageBoxImage.Information);
                     return newRecipe;
                 }
             }

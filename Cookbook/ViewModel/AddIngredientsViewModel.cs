@@ -97,10 +97,67 @@ namespace Cookbook.ViewModel
         {
             try
             {
-                NewIngredient = Ingredient;
-                //NewIngredient.tblRecipe = Recipe;
-                //ingredientService.AddIngredient(newIngredient);
-                IngredientsList = ingredientService.GetAllIngredients();
+                if (view.Salt.IsChecked == true)
+                {
+                    tblIngredient Salt = new tblIngredient();
+                    Salt.IngredientName = "Salt";
+                    Recipe.tblIngredients1.Add(Salt);
+                }
+                if (view.Milk.IsChecked == true)
+                {
+                    tblIngredient Milk = new tblIngredient();
+                    Milk.IngredientName = "Milk";
+                    Recipe.tblIngredients1.Add(Milk);
+                }
+                if (view.Sugar.IsChecked == true)
+                {
+                    tblIngredient Sugar = new tblIngredient();
+                    Sugar.IngredientName = "Sugar";
+                    Recipe.tblIngredients1.Add(Sugar);
+                }
+                if (view.Tomato.IsChecked == true)
+                {
+                    tblIngredient Tomato = new tblIngredient();
+                    Tomato.IngredientName = "Tomato";
+                    Recipe.tblIngredients1.Add(Tomato);
+                }
+                if (view.Mayonnaise.IsChecked == true)
+                {
+                    tblIngredient Mayonnaise = new tblIngredient();
+                    Mayonnaise.IngredientName = "Mayonnaise";
+                    Recipe.tblIngredients1.Add(Mayonnaise);
+                }
+                if (view.Ketchup.IsChecked == true)
+                {
+                    tblIngredient Ketchup = new tblIngredient();
+                    Ketchup.IngredientName = "Ketchup";
+                    Recipe.tblIngredients1.Add(Ketchup);
+                }
+                if (view.Cheese.IsChecked == true)
+                {
+                    tblIngredient Cheese = new tblIngredient();
+                    Cheese.IngredientName = "Cheese";
+                    Recipe.tblIngredients1.Add(Cheese);
+                }
+                if (view.Egg.IsChecked == true)
+                {
+                    tblIngredient Egg = new tblIngredient();
+                    Egg.IngredientName = "Egg";
+                    Recipe.tblIngredients1.Add(Egg);
+                }
+                if (view.Ham.IsChecked == true)
+                {
+                    tblIngredient Ham = new tblIngredient();
+                    Ham.IngredientName = "Ham";
+                    Recipe.tblIngredients1.Add(Ham);
+                }
+                if (view.Flour.IsChecked == true)
+                {
+                    tblIngredient Flour = new tblIngredient();
+                    Flour.IngredientName = "Flour";
+                    Recipe.tblIngredients1.Add(Flour);
+                }
+
             }
             catch (Exception ex)
             {
