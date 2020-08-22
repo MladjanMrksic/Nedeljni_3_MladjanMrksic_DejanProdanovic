@@ -117,7 +117,7 @@ namespace Cookbook.ViewModel
                 using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
                     tblRecipe recipeToUpdate = ConvertTotblRepcipe(Recipe);
-                    UpdateRecipeView recipeView = new UpdateRecipeView(recipeToUpdate);
+                    UpdateRecipeView recipeView = new UpdateRecipeView(recipeToUpdate,User);
                     recipeView.ShowDialog();
                     RecipeList = recipeService.GetAllvwRecipes();
                 }

@@ -17,10 +17,11 @@ namespace Cookbook.ViewModel
         UpdateRecipeView view;
         RecipeService recipeService = new RecipeService();
 
-        public UpdateRecipeViewModel(UpdateRecipeView urv, tblRecipe rec)
+        public UpdateRecipeViewModel(UpdateRecipeView urv, tblRecipe rec,tblPerson personLogedIn)
         {
             view = urv;
             Recipe = rec;
+            User = personLogedIn;
         }
 
         private tblRecipe recipe;
@@ -28,6 +29,14 @@ namespace Cookbook.ViewModel
         {
             get { return recipe; }
             set { recipe = value; OnPropertyChanged("Recipe"); }
+        }
+
+
+        private tblPerson user;
+        public tblPerson User
+        {
+            get { return user; }
+            set { user = value; OnPropertyChanged("User"); }
         }
 
         private ICommand save;
@@ -52,6 +61,7 @@ namespace Cookbook.ViewModel
                     return;
                 }
                 Recipe.DateCreated = DateTime.Now;
+                Recipe.Author = User.PersonID;
                 recipeService.UpdateRecipe(Recipe);
                 view.Close();
             }

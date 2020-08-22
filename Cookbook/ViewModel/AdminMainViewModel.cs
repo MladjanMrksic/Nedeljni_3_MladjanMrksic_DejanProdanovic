@@ -76,9 +76,23 @@ namespace Cookbook.ViewModel
             {
                 if (Recipe != null)
                 {
+                    MessageBoxResult result = MessageBox.Show("Are you sure that you want to " +
+                      "delete this Employee?" +
+                      "", "My App",
+                      MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                     int recipeID = Recipe.RecipeID;
-                    recipeService.DeleteRecipe(recipeID);
-                    RecipeList = recipeService.GetAllvwRecipes();
+
+
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            recipeService.DeleteRecipe(recipeID);
+                            RecipeList = recipeService.GetAllvwRecipes();
+
+                            break;
+                    }
+                   
+                 
                 }
             }
             catch (Exception ex)
@@ -117,7 +131,7 @@ namespace Cookbook.ViewModel
                 using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
                     tblRecipe recipeToUpdate = ConvertTotblRepcipe(Recipe);
-                    UpdateRecipeView recipeView = new UpdateRecipeView(recipeToUpdate);
+                    UpdateRecipeView recipeView = new UpdateRecipeView(recipeToUpdate, User);
                     recipeView.ShowDialog();
                     RecipeList = recipeService.GetAllvwRecipes();
                 }

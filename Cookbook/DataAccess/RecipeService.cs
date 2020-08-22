@@ -128,6 +128,7 @@ namespace Cookbook.DataAccess
                     recipe.Description = Updated.Description;
                     recipe.RecipeType = Updated.RecipeType;
                     recipe.tblIngredients = Updated.tblIngredients;
+                    recipe.Author = Updated.Author;
                     context.SaveChanges();
                     MessageBox.Show("Recipe successfully updated!", "Updated", MessageBoxButton.OK, MessageBoxImage.Information);
                     return recipe;

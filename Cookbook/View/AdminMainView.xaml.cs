@@ -30,5 +30,17 @@ namespace Cookbook.View
             InitializeComponent();
             DataContext = new AdminMainViewModel(this, person);
         }
+
+        private void TextBoxName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var view = CollectionViewSource.GetDefaultView((DataContext as AdminMainViewModel).RecipeList);
+            view.Filter = o => (o as vwRecipe).RecipeName.Contains((sender as TextBox).Text);
+        }
+
+        private void TextBoxType_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var view = CollectionViewSource.GetDefaultView((DataContext as AdminMainViewModel).RecipeList);
+            view.Filter = o => (o as vwRecipe).RecipeType.Contains((sender as TextBox).Text);
+        }
     }
 }

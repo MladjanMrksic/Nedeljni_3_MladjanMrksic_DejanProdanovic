@@ -80,6 +80,12 @@ namespace Cookbook.ViewModel
 
             string encryptedString = (obj as PasswordBox).Password;
 
+            if (encryptedString.Length<5)
+            {
+                MessageBox.Show("Password has to be at least 5 characters long");
+                return;
+            }
+
             string password = EncryptionHelper.Encrypt(encryptedString);
 
             if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(encryptedString))
