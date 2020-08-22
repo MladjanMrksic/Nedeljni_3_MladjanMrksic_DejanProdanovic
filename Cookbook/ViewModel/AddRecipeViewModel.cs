@@ -15,7 +15,7 @@ namespace Cookbook.ViewModel
     class AddRecipeViewModel : ViewModelBase
     {
         AddRecipeView view;
-        RecipeService recipeService = new RecipeService();
+        RecipeService recipeServie = new RecipeService();
         public AddRecipeViewModel(AddRecipeView arv, tblPerson p)
         {
             view = arv;
@@ -82,7 +82,7 @@ namespace Cookbook.ViewModel
             {
                 Recipe.DateCreated = DateTime.Now;
                 Recipe.tblPerson = User;
-                recipeService.AddNewRecipe(Recipe);
+                recipeServie.AddNewRecipe(Recipe);
             }
             catch (Exception ex)
             {
