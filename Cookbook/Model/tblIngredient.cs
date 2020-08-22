@@ -14,11 +14,19 @@ namespace Cookbook.Model
     
     public partial class tblIngredient
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblIngredient()
+        {
+            this.tblRecipes = new HashSet<tblRecipe>();
+        }
+    
         public int IngredientID { get; set; }
         public string IngredientName { get; set; }
         public Nullable<int> Ammount { get; set; }
         public Nullable<int> Recipe { get; set; }
     
         public virtual tblRecipe tblRecipe { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblRecipe> tblRecipes { get; set; }
     }
 }

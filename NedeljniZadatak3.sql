@@ -5,6 +5,8 @@ GO
 USE CookbookDatabase
 GO
 
+IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblIngredientRecipe')
+drop table tblIngredientRecipe
 IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblIngredients')
 drop table tblIngredients
 IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblShoppingList')
@@ -13,6 +15,7 @@ IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblRecipe')
 drop table tblRecipe
 IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblPerson')
 drop table tblPerson
+
 
 CREATE TABLE tblPerson
 (
@@ -51,6 +54,13 @@ Owned bit default(0),
 Recipe int FOREIGN KEY REFERENCES tblRecipe(RecipeID),
 Person int FOREIGN KEY REFERENCES tblPerson(PersonID)
 )
+
+CREATE TABLE tblIngredientRecipe (
+   
+	IngredientID int FOREIGN KEY REFERENCES tblIngredients(IngredientID),
+	RecipeID int FOREIGN KEY REFERENCES tblRecipe(RecipeID)  ,
+	primary key(IngredientID,RecipeID)
+);
 
 USE CookbookDatabase
 GO

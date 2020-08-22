@@ -98,8 +98,8 @@ namespace Cookbook.ViewModel
             try
             {
                 NewIngredient = Ingredient;
-                NewIngredient.tblRecipe = Recipe;
-                ingredientService.AddIngredient(newIngredient);
+                //NewIngredient.tblRecipe = Recipe;
+                //ingredientService.AddIngredient(newIngredient);
                 IngredientsList = ingredientService.GetAllIngredients();
             }
             catch (Exception ex)

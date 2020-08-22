@@ -12,38 +12,113 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="200"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="20"/>
+                    <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="1" Grid.Row="1" Height="auto" Width="auto">
-                    <DataGrid Name="DataGridRecipes" ItemsSource="{Binding IngredientsList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding Ingredient, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
-                      AutoGenerateColumns="False" HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
-                      FontWeight="Bold">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Ingredient" Binding="{Binding IngredientName}"/>
-                            <DataGridTemplateColumn Header="Add">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Name="btnAddIngredient"
-                                        Command="{Binding DataContext.Add, RelativeSource={RelativeSource FindAncestor,
-                                    AncestorType={x:Type Window}},UpdateSourceTrigger=PropertyChanged}" Content="Add"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>                            
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-                <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
 
-                    <Button Name="btnClose" Content="Close" Width="Auto" Height="20" HorizontalAlignment="Center" Margin="0,0,20,0"
-                Command="{Binding Close, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                <StackPanel Grid.Row="1" Grid.Column="3">
+                    <Label Foreground="White" FontSize="18">
+                        Choose ingredients for your recipe
+                    </Label>
+                </StackPanel>
+                <StackPanel  Grid.Column="2" Grid.Row="2" Orientation="Vertical" Margin="10" >
+                    <CheckBox Width="130" Name="Milk"
+                              Content="Milk" Foreground="White"
+                              Command="{Binding Path=ChooseMilk}" Margin="10"
+                    CommandParameter="{Binding ElementName=Milk, Path=IsChecked}">
+
+                    </CheckBox>
+                    <CheckBox Width="130" Name="Salt"
+                              Content="Salt"
+                              Foreground="White"
+                              Command="{Binding Path=ChooseSalt}" Margin="10"
+                    CommandParameter="{Binding ElementName=Salt, Path=IsChecked}">
+                    </CheckBox>
+                    <CheckBox Width="130" Name="Sugar"
+                              Content="Sugar"
+                              Foreground="White"
+                              Command="{Binding Path=ChooseSugar}" Margin="10"
+                    CommandParameter="{Binding ElementName=Sugar, Path=IsChecked}">
+                    </CheckBox>
+                    <CheckBox Width="130" Name="Tomato"
+                              Content="Tomato"
+                              Foreground="White"
+                              Command="{Binding Path=ChooseTomato}" Margin="10"
+                    CommandParameter="{Binding ElementName=Tomato, Path=IsChecked}">
+                    </CheckBox>
+                    <CheckBox Width="130" Name="Mayonnaise"
+                              Content="Mayonnaise"
+                              Foreground="White"
+                              Command="{Binding Path=ChooseMayonnaise}" Margin="10"
+                    CommandParameter="{Binding ElementName=Mayonnaise, Path=IsChecked}">
+                    </CheckBox>
+                    <CheckBox Width="130" Name="Mushroom"
+                              Content="Mushroom"
+                              Foreground="White"
+                              Command="{Binding Path=ChooseMushroom}" Margin="10"
+                    CommandParameter="{Binding ElementName=Mushroom, Path=IsChecked}">
+                    </CheckBox>
+                </StackPanel>
+                <StackPanel  Grid.Column="3" Grid.Row="2" Orientation="Vertical" Margin="10" >
+                    <CheckBox Width="130" Name="Ketchup"
+                              Content="Ketchup" Foreground="White"
+                              Command="{Binding Path=ChooseKetchup}" Margin="10"
+                    CommandParameter="{Binding ElementName=Ketchup, Path=IsChecked}">
+
+                    </CheckBox>
+                    <CheckBox Width="130" Name="Cheese"
+                              Content="Cheese"
+                              Foreground="White"
+                              Command="{Binding Path=ChooseCheese}" Margin="10"
+                    CommandParameter="{Binding ElementName=Cheese, Path=IsChecked}">
+
+                    </CheckBox>
+                    <CheckBox Width="130" Name="Egg"
+                              Content="Egg"
+                              Foreground="White"
+                              Command="{Binding Path=ChooseEgg}" Margin="10"
+                    CommandParameter="{Binding ElementName=Egg, Path=IsChecked}">
+                    </CheckBox>
+                    <CheckBox Width="130" Name="Ham"
+                              Content="Ham"
+                              Foreground="White"
+                              Command="{Binding Path=ChooseHam}" Margin="10"
+                    CommandParameter="{Binding ElementName=Ham, Path=IsChecked}">
+                    </CheckBox>
+                    <CheckBox Width="130" Name="Flour"
+                              Content="Flour"
+                              Foreground="White"
+                              Command="{Binding Path=ChooseFlour}" Margin="10"
+                    CommandParameter="{Binding ElementName=Flour, Path=IsChecked}">
+                    </CheckBox>
+                </StackPanel>
+                <StackPanel Grid.Column="3" Grid.Row="5" Orientation="Horizontal">
+
+                    <Button Name="btnClose"
+                            Content="Close"
+                            Width="50" Height="30" 
+                            HorizontalAlignment="Center" 
+                            Margin="0,0,20,0"
+                Command="{Binding Close, UpdateSourceTrigger=PropertyChanged}" 
+                            FontWeight="Bold"/>
+                    <Button Name="btnConfirm"
+                            Content="Confirm"
+                            Width="50" Height="30" 
+                            HorizontalAlignment="Center" 
+                            Margin="0,0,20,0"
+                Command="{Binding Close, UpdateSourceTrigger=PropertyChanged}" 
+                            FontWeight="Bold"/>
 
                 </StackPanel>
             </Grid>
