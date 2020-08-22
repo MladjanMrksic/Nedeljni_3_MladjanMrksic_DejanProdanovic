@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cookbook.View"
         mc:Ignorable="d"
-        Title="Add recipe" Height="450" Width="800" Background="Orange" WindowStartupLocation="CenterScreen">
+        Title="Add recipe"  Height="450" Width="800" Background="Orange" WindowStartupLocation="CenterScreen">
     <Grid>
         <Border Background="#2e3137" CornerRadius="20" Margin="20">
             <Grid>

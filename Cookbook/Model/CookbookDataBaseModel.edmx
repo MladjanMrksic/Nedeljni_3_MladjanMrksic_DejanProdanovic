@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CookbookDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CookbookDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblIngredientRecipe">
           <Key>
             <PropertyRef Name="IngredientID" />
@@ -19,8 +19,6 @@
           </Key>
           <Property Name="IngredientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IngredientName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Ammount" Type="int" />
-          <Property Name="Recipe" Type="int" />
         </EntityType>
         <EntityType Name="tblPerson">
           <Key>
@@ -31,6 +29,14 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblPersonRecipe">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="RecipeID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="RecipeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblRecipe">
           <Key>
@@ -44,18 +50,25 @@
           <Property Name="Description" Type="nvarchar" MaxLength="150" />
           <Property Name="DateCreated" Type="date" />
         </EntityType>
-        <EntityType Name="tblShoppingList">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CookbookDatabase.dbo.vwRecipe' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwRecipe">
           <Key>
-            <PropertyRef Name="IngredientID" />
+            <PropertyRef Name="RecipeID" />
+            <PropertyRef Name="PersonID" />
           </Key>
-          <Property Name="IngredientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IngredientName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Ammount" Type="int" />
-          <Property Name="Owned" Type="bit" />
-          <Property Name="Recipe" Type="int" />
-          <Property Name="Person" Type="int" />
+          <Property Name="RecipeID" Type="int" Nullable="false" />
+          <Property Name="RecipeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RecipeType" Type="nvarchar" MaxLength="20" />
+          <Property Name="IntendedFor" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="DateCreated" Type="date" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__tblIngred__Ingre__5F492382">
+        <Association Name="FK__tblIngred__Ingre__5535A963">
           <End Role="tblIngredients" Type="Self.tblIngredients" Multiplicity="1" />
           <End Role="tblIngredientRecipe" Type="Self.tblIngredientRecipe" Multiplicity="*" />
           <ReferentialConstraint>
@@ -67,19 +80,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblIngred__Recip__57A801BA">
-          <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="0..1" />
-          <End Role="tblIngredients" Type="Self.tblIngredients" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblRecipe">
-              <PropertyRef Name="RecipeID" />
-            </Principal>
-            <Dependent Role="tblIngredients">
-              <PropertyRef Name="Recipe" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__tblIngred__Recip__603D47BB">
+        <Association Name="FK__tblIngred__Recip__5629CD9C">
           <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="1" />
           <End Role="tblIngredientRecipe" Type="Self.tblIngredientRecipe" Multiplicity="*" />
           <ReferentialConstraint>
@@ -91,7 +92,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRecipe__Autho__54CB950F">
+        <Association Name="FK__tblPerson__Perso__5165187F">
+          <End Role="tblPerson" Type="Self.tblPerson" Multiplicity="1" />
+          <End Role="tblPersonRecipe" Type="Self.tblPersonRecipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPerson">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="tblPersonRecipe">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPerson__Recip__52593CB8">
+          <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="1" />
+          <End Role="tblPersonRecipe" Type="Self.tblPersonRecipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRecipe">
+              <PropertyRef Name="RecipeID" />
+            </Principal>
+            <Dependent Role="tblPersonRecipe">
+              <PropertyRef Name="RecipeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRecipe__Autho__4CA06362">
           <End Role="tblPerson" Type="Self.tblPerson" Multiplicity="0..1" />
           <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="*" />
           <ReferentialConstraint>
@@ -103,62 +128,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblShoppi__Perso__5C6CB6D7">
-          <End Role="tblPerson" Type="Self.tblPerson" Multiplicity="0..1" />
-          <End Role="tblShoppingList" Type="Self.tblShoppingList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblPerson">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="tblShoppingList">
-              <PropertyRef Name="Person" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__tblShoppi__Recip__5B78929E">
-          <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="0..1" />
-          <End Role="tblShoppingList" Type="Self.tblShoppingList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblRecipe">
-              <PropertyRef Name="RecipeID" />
-            </Principal>
-            <Dependent Role="tblShoppingList">
-              <PropertyRef Name="Recipe" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="CookbookDatabaseModelStoreContainer">
           <EntitySet Name="tblIngredientRecipe" EntityType="Self.tblIngredientRecipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblIngredients" EntityType="Self.tblIngredients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPerson" EntityType="Self.tblPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPersonRecipe" EntityType="Self.tblPersonRecipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRecipe" EntityType="Self.tblRecipe" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblShoppingList" EntityType="Self.tblShoppingList" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tblIngred__Ingre__5F492382" Association="Self.FK__tblIngred__Ingre__5F492382">
+          <EntitySet Name="vwRecipe" EntityType="Self.vwRecipe" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwRecipe].[RecipeID] AS [RecipeID], 
+    [vwRecipe].[RecipeName] AS [RecipeName], 
+    [vwRecipe].[RecipeType] AS [RecipeType], 
+    [vwRecipe].[IntendedFor] AS [IntendedFor], 
+    [vwRecipe].[Description] AS [Description], 
+    [vwRecipe].[DateCreated] AS [DateCreated], 
+    [vwRecipe].[PersonID] AS [PersonID], 
+    [vwRecipe].[FirstName] AS [FirstName], 
+    [vwRecipe].[LastName] AS [LastName], 
+    [vwRecipe].[Username] AS [Username]
+    FROM [dbo].[vwRecipe] AS [vwRecipe]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tblIngred__Ingre__5535A963" Association="Self.FK__tblIngred__Ingre__5535A963">
             <End Role="tblIngredients" EntitySet="tblIngredients" />
             <End Role="tblIngredientRecipe" EntitySet="tblIngredientRecipe" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblIngred__Recip__57A801BA" Association="Self.FK__tblIngred__Recip__57A801BA">
-            <End Role="tblRecipe" EntitySet="tblRecipe" />
-            <End Role="tblIngredients" EntitySet="tblIngredients" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblIngred__Recip__603D47BB" Association="Self.FK__tblIngred__Recip__603D47BB">
+          <AssociationSet Name="FK__tblIngred__Recip__5629CD9C" Association="Self.FK__tblIngred__Recip__5629CD9C">
             <End Role="tblRecipe" EntitySet="tblRecipe" />
             <End Role="tblIngredientRecipe" EntitySet="tblIngredientRecipe" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRecipe__Autho__54CB950F" Association="Self.FK__tblRecipe__Autho__54CB950F">
+          <AssociationSet Name="FK__tblPerson__Perso__5165187F" Association="Self.FK__tblPerson__Perso__5165187F">
+            <End Role="tblPerson" EntitySet="tblPerson" />
+            <End Role="tblPersonRecipe" EntitySet="tblPersonRecipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPerson__Recip__52593CB8" Association="Self.FK__tblPerson__Recip__52593CB8">
+            <End Role="tblRecipe" EntitySet="tblRecipe" />
+            <End Role="tblPersonRecipe" EntitySet="tblPersonRecipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRecipe__Autho__4CA06362" Association="Self.FK__tblRecipe__Autho__4CA06362">
             <End Role="tblPerson" EntitySet="tblPerson" />
             <End Role="tblRecipe" EntitySet="tblRecipe" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblShoppi__Perso__5C6CB6D7" Association="Self.FK__tblShoppi__Perso__5C6CB6D7">
-            <End Role="tblPerson" EntitySet="tblPerson" />
-            <End Role="tblShoppingList" EntitySet="tblShoppingList" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblShoppi__Recip__5B78929E" Association="Self.FK__tblShoppi__Recip__5B78929E">
-            <End Role="tblRecipe" EntitySet="tblRecipe" />
-            <End Role="tblShoppingList" EntitySet="tblShoppingList" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CookbookDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -168,10 +180,7 @@
           </Key>
           <Property Name="IngredientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IngredientName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Ammount" Type="Int32" />
-          <Property Name="Recipe" Type="Int32" />
-          <NavigationProperty Name="tblRecipe" Relationship="Self.FK__tblIngred__Recip__7755B73D" FromRole="tblIngredients" ToRole="tblRecipe" />
-          <NavigationProperty Name="tblRecipes" Relationship="CookbookDatabaseModel.tblIngredientRecipe" FromRole="tblIngredient" ToRole="tblRecipe" />
+          <NavigationProperty Name="tblRecipes" Relationship="Self.tblIngredientRecipe" FromRole="tblIngredients" ToRole="tblRecipe" />
         </EntityType>
         <EntityType Name="tblPerson">
           <Key>
@@ -182,8 +191,8 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblRecipes" Relationship="Self.FK__tblRecipe__Autho__74794A92" FromRole="tblPerson" ToRole="tblRecipe" />
-          <NavigationProperty Name="tblShoppingLists" Relationship="Self.FK__tblShoppi__Perso__7C1A6C5A" FromRole="tblPerson" ToRole="tblShoppingList" />
+          <NavigationProperty Name="tblRecipes" Relationship="Self.FK__tblRecipe__Autho__4CA06362" FromRole="tblPerson" ToRole="tblRecipe" />
+          <NavigationProperty Name="tblRecipes1" Relationship="Self.tblPersonRecipe" FromRole="tblPerson" ToRole="tblRecipe" />
         </EntityType>
         <EntityType Name="tblRecipe">
           <Key>
@@ -196,37 +205,27 @@
           <Property Name="Author" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="DateCreated" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="tblIngredients" Relationship="Self.FK__tblIngred__Recip__7755B73D" FromRole="tblRecipe" ToRole="tblIngredients" />
-          <NavigationProperty Name="tblPerson" Relationship="Self.FK__tblRecipe__Autho__74794A92" FromRole="tblRecipe" ToRole="tblPerson" />
-          <NavigationProperty Name="tblShoppingLists" Relationship="Self.FK__tblShoppi__Recip__7B264821" FromRole="tblRecipe" ToRole="tblShoppingList" />
-          <NavigationProperty Name="tblIngredients1" Relationship="CookbookDatabaseModel.tblIngredientRecipe" FromRole="tblRecipe" ToRole="tblIngredient" />
+          <NavigationProperty Name="tblPerson" Relationship="Self.FK__tblRecipe__Autho__4CA06362" FromRole="tblRecipe" ToRole="tblPerson" />
+          <NavigationProperty Name="tblIngredients" Relationship="Self.tblIngredientRecipe" FromRole="tblRecipe" ToRole="tblIngredients" />
+          <NavigationProperty Name="tblPersons" Relationship="Self.tblPersonRecipe" FromRole="tblRecipe" ToRole="tblPerson" />
         </EntityType>
-        <EntityType Name="tblShoppingList">
+        <EntityType Name="vwRecipe">
           <Key>
-            <PropertyRef Name="IngredientID" />
+            <PropertyRef Name="RecipeID" />
+            <PropertyRef Name="PersonID" />
           </Key>
-          <Property Name="IngredientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IngredientName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Ammount" Type="Int32" />
-          <Property Name="Owned" Type="Boolean" />
-          <Property Name="Recipe" Type="Int32" />
-          <Property Name="Person" Type="Int32" />
-          <NavigationProperty Name="tblPerson" Relationship="Self.FK__tblShoppi__Perso__7C1A6C5A" FromRole="tblShoppingList" ToRole="tblPerson" />
-          <NavigationProperty Name="tblRecipe" Relationship="Self.FK__tblShoppi__Recip__7B264821" FromRole="tblShoppingList" ToRole="tblRecipe" />
+          <Property Name="RecipeID" Type="Int32" Nullable="false" />
+          <Property Name="RecipeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RecipeType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IntendedFor" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="0" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK__tblIngred__Recip__7755B73D">
-          <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="0..1" />
-          <End Role="tblIngredients" Type="Self.tblIngredient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblRecipe">
-              <PropertyRef Name="RecipeID" />
-            </Principal>
-            <Dependent Role="tblIngredients">
-              <PropertyRef Name="Recipe" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__tblRecipe__Autho__74794A92">
+        <Association Name="FK__tblRecipe__Autho__4CA06362">
           <End Role="tblPerson" Type="Self.tblPerson" Multiplicity="0..1" />
           <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="*" />
           <ReferentialConstraint>
@@ -238,73 +237,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblShoppi__Perso__7C1A6C5A">
-          <End Role="tblPerson" Type="Self.tblPerson" Multiplicity="0..1" />
-          <End Role="tblShoppingList" Type="Self.tblShoppingList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblPerson">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="tblShoppingList">
-              <PropertyRef Name="Person" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="tblIngredientRecipe">
+          <End Role="tblIngredients" Type="Self.tblIngredient" Multiplicity="*" />
+          <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="*" />
         </Association>
-        <Association Name="FK__tblShoppi__Recip__7B264821">
-          <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="0..1" />
-          <End Role="tblShoppingList" Type="Self.tblShoppingList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblRecipe">
-              <PropertyRef Name="RecipeID" />
-            </Principal>
-            <Dependent Role="tblShoppingList">
-              <PropertyRef Name="Recipe" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="tblPersonRecipe">
+          <End Role="tblPerson" Type="Self.tblPerson" Multiplicity="*" />
+          <End Role="tblRecipe" Type="Self.tblRecipe" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="CookbookDatabaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CookbookDatabaseEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblIngredients" EntityType="Self.tblIngredient" />
           <EntitySet Name="tblPersons" EntityType="Self.tblPerson" />
           <EntitySet Name="tblRecipes" EntityType="Self.tblRecipe" />
-          <EntitySet Name="tblShoppingLists" EntityType="Self.tblShoppingList" />
-          <AssociationSet Name="FK__tblIngred__Recip__7755B73D" Association="Self.FK__tblIngred__Recip__7755B73D">
+          <EntitySet Name="vwRecipes" EntityType="Self.vwRecipe" />
+          <AssociationSet Name="FK__tblRecipe__Autho__4CA06362" Association="Self.FK__tblRecipe__Autho__4CA06362">
+            <End Role="tblPerson" EntitySet="tblPersons" />
             <End Role="tblRecipe" EntitySet="tblRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="tblIngredientRecipe" Association="Self.tblIngredientRecipe">
             <End Role="tblIngredients" EntitySet="tblIngredients" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblRecipe__Autho__74794A92" Association="Self.FK__tblRecipe__Autho__74794A92">
-            <End Role="tblPerson" EntitySet="tblPersons" />
             <End Role="tblRecipe" EntitySet="tblRecipes" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblShoppi__Perso__7C1A6C5A" Association="Self.FK__tblShoppi__Perso__7C1A6C5A">
+          <AssociationSet Name="tblPersonRecipe" Association="Self.tblPersonRecipe">
             <End Role="tblPerson" EntitySet="tblPersons" />
-            <End Role="tblShoppingList" EntitySet="tblShoppingLists" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblShoppi__Recip__7B264821" Association="Self.FK__tblShoppi__Recip__7B264821">
-            <End Role="tblRecipe" EntitySet="tblRecipes" />
-            <End Role="tblShoppingList" EntitySet="tblShoppingLists" />
-          </AssociationSet>
-          <AssociationSet Name="tblIngredientRecipe" Association="CookbookDatabaseModel.tblIngredientRecipe">
-            <End Role="tblIngredient" EntitySet="tblIngredients" />
             <End Role="tblRecipe" EntitySet="tblRecipes" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="tblIngredientRecipe">
-          <End Type="CookbookDatabaseModel.tblIngredient" Role="tblIngredient" Multiplicity="*" />
-          <End Type="CookbookDatabaseModel.tblRecipe" Role="tblRecipe" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CookbookDatabaseModelStoreContainer" CdmEntityContainer="CookbookDatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="CookbookDatabaseModelStoreContainer" CdmEntityContainer="CookbookDatabaseEntities1">
           <EntitySetMapping Name="tblIngredients">
             <EntityTypeMapping TypeName="CookbookDatabaseModel.tblIngredient">
               <MappingFragment StoreEntitySet="tblIngredients">
                 <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
                 <ScalarProperty Name="IngredientName" ColumnName="IngredientName" />
-                <ScalarProperty Name="Ammount" ColumnName="Ammount" />
-                <ScalarProperty Name="Recipe" ColumnName="Recipe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -332,24 +301,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblShoppingLists">
-            <EntityTypeMapping TypeName="CookbookDatabaseModel.tblShoppingList">
-              <MappingFragment StoreEntitySet="tblShoppingList">
-                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
-                <ScalarProperty Name="IngredientName" ColumnName="IngredientName" />
-                <ScalarProperty Name="Ammount" ColumnName="Ammount" />
-                <ScalarProperty Name="Owned" ColumnName="Owned" />
-                <ScalarProperty Name="Recipe" ColumnName="Recipe" />
-                <ScalarProperty Name="Person" ColumnName="Person" />
+          <EntitySetMapping Name="vwRecipes">
+            <EntityTypeMapping TypeName="CookbookDatabaseModel.vwRecipe">
+              <MappingFragment StoreEntitySet="vwRecipe">
+                <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
+                <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+                <ScalarProperty Name="RecipeType" ColumnName="RecipeType" />
+                <ScalarProperty Name="IntendedFor" ColumnName="IntendedFor" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="tblIngredientRecipe" TypeName="CookbookDatabaseModel.tblIngredientRecipe" StoreEntitySet="tblIngredientRecipe">
+            <EndProperty Name="tblIngredients">
+              <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+            </EndProperty>
             <EndProperty Name="tblRecipe">
               <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
             </EndProperty>
-            <EndProperty Name="tblIngredient">
-              <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tblPersonRecipe" TypeName="CookbookDatabaseModel.tblPersonRecipe" StoreEntitySet="tblPersonRecipe">
+            <EndProperty Name="tblPerson">
+              <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            </EndProperty>
+            <EndProperty Name="tblRecipe">
+              <ScalarProperty Name="RecipeID" ColumnName="RecipeID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

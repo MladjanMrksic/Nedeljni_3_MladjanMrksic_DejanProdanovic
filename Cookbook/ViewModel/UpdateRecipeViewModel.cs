@@ -16,10 +16,12 @@ namespace Cookbook.ViewModel
     {
         UpdateRecipeView view;
         RecipeService recipeService = new RecipeService();
-        public UpdateRecipeViewModel(UpdateRecipeView urv, tblRecipe rec)
+
+        public UpdateRecipeViewModel(UpdateRecipeView urv, tblRecipe rec,tblPerson personLogedIn)
         {
             view = urv;
             Recipe = rec;
+            User = personLogedIn;
         }
 
         private tblRecipe recipe;
@@ -27,6 +29,14 @@ namespace Cookbook.ViewModel
         {
             get { return recipe; }
             set { recipe = value; OnPropertyChanged("Recipe"); }
+        }
+
+
+        private tblPerson user;
+        public tblPerson User
+        {
+            get { return user; }
+            set { user = value; OnPropertyChanged("User"); }
         }
 
         private ICommand save;
@@ -45,7 +55,15 @@ namespace Cookbook.ViewModel
         {
             try
             {
+                if (Recipe.IntendedFor == null)
+                {
+                    MessageBox.Show("IntendedFor must be integer number");
+                    return;
+                }
+                Recipe.DateCreated = DateTime.Now;
+                Recipe.Author = User.PersonID;
                 recipeService.UpdateRecipe(Recipe);
+                view.Close();
             }
             catch (Exception ex)
             {
@@ -54,6 +72,11 @@ namespace Cookbook.ViewModel
         }
         private bool CanSaveExecute()
         {
+            if (string.IsNullOrEmpty(Recipe.RecipeName) ||
+               string.IsNullOrEmpty(Recipe.RecipeType) || string.IsNullOrEmpty(Recipe.Description))
+            {
+                return false;
+            }
             return true;
         }
 
@@ -81,6 +104,39 @@ namespace Cookbook.ViewModel
             }
         }
         private bool CanCloseExecute()
+        {
+            return true;
+        }
+
+        private ICommand addIngredients;
+        public ICommand AddIngredients
+        {
+            get
+            {
+                if (addIngredients == null)
+                {
+                    addIngredients = new RelayCommand(param => AddIngredientsExecute(), param => CanAddIngredientsExecute());
+                }
+                return addIngredients;
+            }
+        }
+        private void AddIngredientsExecute()
+        {
+            try
+            {
+                AddIngredientsView ingredientsView = new AddIngredientsView(Recipe);
+                ingredientsView.ShowDialog();
+                //if ((ingredientsView.DataContext as AddIngredientsViewModel).IngredientsAdded == true)
+                //{
+                //    hasIngredients = true;
+                //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception" + ex.Message.ToString());
+            }
+        }
+        private bool CanAddIngredientsExecute()
         {
             return true;
         }

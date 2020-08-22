@@ -21,9 +21,9 @@ namespace Cookbook.View
     /// </summary>
     public partial class UpdateRecipeView : Window
     {
-        public UpdateRecipeView(tblRecipe recipe)
+        public UpdateRecipeView(tblRecipe recipe,tblPerson user)
         {
-            DataContext = new UpdateRecipeViewModel(this, recipe);
+            DataContext = new UpdateRecipeViewModel(this, recipe,user);
             InitializeComponent();
         }
     }

@@ -68,6 +68,7 @@ namespace Cookbook.ViewModel
 
 
                 UserMain main = new UserMain(User);
+                MessageBox.Show("You successfully created account");
                 main.Show();
 
                 view.Close();

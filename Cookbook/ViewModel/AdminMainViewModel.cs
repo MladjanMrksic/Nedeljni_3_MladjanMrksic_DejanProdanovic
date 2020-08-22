@@ -12,11 +12,11 @@ using System.Windows.Input;
 
 namespace Cookbook.ViewModel
 {
-    class UserMainViewModel : ViewModelBase
+    class AdminMainViewModel:ViewModelBase
     {
-        UserMain view;
+        AdminMainView view;
         RecipeService recipeService = new RecipeService();
-        public UserMainViewModel(UserMain um, tblPerson p)
+        public AdminMainViewModel(AdminMainView um, tblPerson p)
         {
             view = um;
             User = p;
@@ -76,9 +76,23 @@ namespace Cookbook.ViewModel
             {
                 if (Recipe != null)
                 {
+                    MessageBoxResult result = MessageBox.Show("Are you sure that you want to " +
+                      "delete this Employee?" +
+                      "", "My App",
+                      MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                     int recipeID = Recipe.RecipeID;
-                    recipeService.DeleteRecipe(recipeID);
-                    RecipeList = recipeService.GetAllvwRecipes();
+
+
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            recipeService.DeleteRecipe(recipeID);
+                            RecipeList = recipeService.GetAllvwRecipes();
+
+                            break;
+                    }
+                   
+                 
                 }
             }
             catch (Exception ex)
@@ -117,7 +131,7 @@ namespace Cookbook.ViewModel
                 using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
                     tblRecipe recipeToUpdate = ConvertTotblRepcipe(Recipe);
-                    UpdateRecipeView recipeView = new UpdateRecipeView(recipeToUpdate,User);
+                    UpdateRecipeView recipeView = new UpdateRecipeView(recipeToUpdate, User);
                     recipeView.ShowDialog();
                     RecipeList = recipeService.GetAllvwRecipes();
                 }
@@ -129,17 +143,16 @@ namespace Cookbook.ViewModel
         }
         private bool CanUpdateRecipeExecute()
         {
+
+
             if (Recipe == null)
             {
                 return false;
             }
-            else if (Recipe.PersonID == User.PersonID || User.Username.Equals("Admin"))
+            else
             {
                 return true;
             }
-
-            else
-                return false;
         }
 
         private ICommand addRecipe;

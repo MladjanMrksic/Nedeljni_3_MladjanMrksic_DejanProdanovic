@@ -16,6 +16,8 @@ namespace Cookbook.ViewModel
     {
         AddRecipeView view;
         RecipeService recipeServie = new RecipeService();
+        bool hasIngredients = false;
+
         public AddRecipeViewModel(AddRecipeView arv, tblPerson p)
         {
             view = arv;
@@ -80,9 +82,18 @@ namespace Cookbook.ViewModel
         {
             try
             {
+                if (Recipe.IntendedFor == null)
+                {
+                    MessageBox.Show("IntendedFor must be integer number");
+                    return;
+                }
                 Recipe.DateCreated = DateTime.Now;
                 Recipe.tblPerson = User;
+                Recipe.Author = User.PersonID;
+
+
                 recipeServie.AddNewRecipe(Recipe);
+                view.Close();
             }
             catch (Exception ex)
             {
@@ -91,6 +102,11 @@ namespace Cookbook.ViewModel
         }
         private bool CanSaveExecute()
         {
+            if (hasIngredients == false || string.IsNullOrEmpty(Recipe.RecipeName) ||
+                string.IsNullOrEmpty(Recipe.RecipeType) || string.IsNullOrEmpty(Recipe.Description))
+            {
+                return false;
+            }
             return true;
         }
 
@@ -113,6 +129,10 @@ namespace Cookbook.ViewModel
             {
                 AddIngredientsView ingredientsView = new AddIngredientsView(Recipe);
                 ingredientsView.ShowDialog();
+                if ((ingredientsView.DataContext as AddIngredientsViewModel).IngredientsAdded == true)
+                {
+                    hasIngredients = true;
+                }
             }
             catch (Exception ex)
             {

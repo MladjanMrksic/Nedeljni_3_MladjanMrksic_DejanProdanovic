@@ -16,6 +16,8 @@ namespace Cookbook.ViewModel
     {
         AddIngredientsView view;
         IngredientService ingredientService = new IngredientService();
+        public bool IngredientsAdded = false;
+
         public AddIngredientsViewModel(AddIngredientsView aiv, tblRecipe rec)
         {
             view = aiv;
@@ -118,6 +120,240 @@ namespace Cookbook.ViewModel
             //    return false;
             //}
 
+            return true;
+        }
+
+        private bool milk;
+
+        public bool Milk
+        {
+            get { return milk; }
+            set
+            {
+                milk = value;
+                OnPropertyChanged("Milk");
+            }
+        }
+
+
+        private bool sugar;
+
+        public bool Sugar
+        {
+            get { return sugar; }
+            set
+            {
+                sugar = value;
+                OnPropertyChanged("Sugar");
+            }
+        }
+
+        private bool mayo;
+
+        public bool Mayo
+        {
+            get { return mayo; }
+            set
+            {
+                mayo = value;
+                OnPropertyChanged("Mayo");
+            }
+        }
+
+        private bool ketchup;
+
+        public bool Ketchup
+        {
+            get { return ketchup; }
+            set
+            {
+                ketchup = value;
+                OnPropertyChanged("Ketchup");
+            }
+        }
+
+        private bool egg;
+
+        public bool Egg
+        {
+            get { return egg; }
+            set
+            {
+                egg = value;
+                OnPropertyChanged("Egg");
+            }
+        }
+
+        private bool flour;
+
+        public bool Flour
+        {
+            get { return flour; }
+            set
+            {
+                flour = value;
+                OnPropertyChanged("Flour");
+            }
+        }
+
+        private bool salt;
+
+        public bool Salt
+        {
+            get { return salt; }
+            set
+            {
+                salt = value;
+                OnPropertyChanged("Salt");
+            }
+        }
+
+        private bool tomato;
+
+        public bool Tomato
+        {
+            get { return tomato; }
+            set
+            {
+                tomato = value;
+                OnPropertyChanged("Tomato");
+            }
+        }
+
+
+        private bool mushrooms;
+
+        public bool Mushrooms
+        {
+            get { return mushrooms; }
+            set
+            {
+                mushrooms = value;
+                OnPropertyChanged("Mushrooms");
+            }
+        }
+
+
+        private bool cheese;
+
+        public bool Cheese
+        {
+            get { return cheese; }
+            set
+            {
+                cheese = value;
+                OnPropertyChanged("Cheese");
+            }
+        }
+
+
+        private bool ham;
+
+        public bool Ham
+        {
+            get { return ham; }
+            set
+            {
+                ham = value;
+                OnPropertyChanged("Ham");
+            }
+        }
+
+        private ICommand save;
+        public ICommand Save
+        {
+            get
+            {
+                if (save == null)
+                {
+                    save = new RelayCommand(param => SaveExecute(), param => CanSaveExecute());
+                }
+                return save;
+            }
+        }
+
+        private void SaveExecute()
+        {
+            try
+            {
+
+                if (Milk == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Milk");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Sugar == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Sugar");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Mayo == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Mayonnaise");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Ketchup == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Ketchup");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Egg == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Egg");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Flour == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Flour");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Salt == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Salt");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Tomato == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Tomato");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Mushrooms == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Mushroom");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Cheese == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Cheese");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+                if (Ham == true)
+                {
+                    tblIngredient ingredient = ingredientService.GetIngredientByName("Ham");
+                    Recipe.tblIngredients.Add(ingredient);
+                }
+
+                IngredientsAdded = true;
+                MessageBox.Show("Intgredients Choosed Successfully!");
+
+
+                view.Close();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private bool CanSaveExecute()
+        {
+            if (Egg == false && Flour == false && Salt == false && Mayo == false
+                 && Sugar == false && Milk == false && Ham == false
+                && Ketchup == false && Mushrooms == false &&
+                Cheese == false && Tomato == false)
+            {
+                return false;
+            }
             return true;
         }
     }

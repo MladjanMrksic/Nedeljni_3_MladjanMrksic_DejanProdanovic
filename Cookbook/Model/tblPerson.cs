@@ -18,7 +18,7 @@ namespace Cookbook.Model
         public tblPerson()
         {
             this.tblRecipes = new HashSet<tblRecipe>();
-            this.tblShoppingLists = new HashSet<tblShoppingList>();
+            this.tblRecipes1 = new HashSet<tblRecipe>();
         }
     
         public int PersonID { get; set; }
@@ -30,6 +30,6 @@ namespace Cookbook.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRecipe> tblRecipes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblShoppingList> tblShoppingLists { get; set; }
+        public virtual ICollection<tblRecipe> tblRecipes1 { get; set; }
     }
 }

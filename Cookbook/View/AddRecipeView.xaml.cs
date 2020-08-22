@@ -26,5 +26,7 @@ namespace Cookbook.View
             DataContext = new AddRecipeViewModel(this,person);
             InitializeComponent();
         }
+
+        
     }
 }

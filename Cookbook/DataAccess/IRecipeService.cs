@@ -10,6 +10,7 @@ namespace Cookbook.DataAccess
     interface IRecipeService
     {
         List<tblRecipe> GetAllRecipes();
+        List<vwRecipe> GetAllvwRecipes();
         tblRecipe GetRecipeByID(int ID);
         tblRecipe AddNewRecipe(tblRecipe recipe);
         tblRecipe UpdateRecipe(tblRecipe recipe);

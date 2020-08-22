@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cookbook.View"
         mc:Ignorable="d"
-        Title="UserMain" Height="450" Width="800" Background="Orange" WindowStartupLocation="CenterScreen">
+        Title="UserMain" Height="600" Width="800" Background="Orange" WindowStartupLocation="CenterScreen">
     <Grid>
         <Border Background="#2e3137" CornerRadius="20" Margin="20">
             <Grid>
@@ -14,7 +14,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="6"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -29,8 +29,11 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Recipe Name" Binding="{Binding RecipeName}"/>
                             <DataGridTextColumn Header="Recipe Type" Binding="{Binding RecipeType}"/>
-                            <DataGridTextColumn Header="Intended for" Binding="{Binding IntendedFor}"/> 
-                            
+                            <DataGridTextColumn Header="Intended for" Binding="{Binding IntendedFor}"/>
+                            <DataGridTextColumn Header="Creation date"  Binding="{Binding DateCreated, 
+                                                                        StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                            <DataGridTextColumn Header="Author"  Binding="{Binding Username}"/>
+                            <!--<DataGridTextColumn Header="Author" Binding="{Binding Username}"/>
                             <DataGridTemplateColumn Header="Delete">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -39,7 +42,7 @@
                                     AncestorType={x:Type Window}},UpdateSourceTrigger=PropertyChanged}" Content="Delete"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            </DataGridTemplateColumn>-->
                             <DataGridTemplateColumn Header="Update">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -57,6 +60,21 @@
                 Command="{Binding AddRecipe, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
                     <Button Name="btnLogout" Content="Logout" Width="Auto" Height="20" HorizontalAlignment="Right" Margin="0,0,20,0"
                 Command="{Binding Logout, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+
+                </StackPanel>
+                <StackPanel Grid.Column="1"
+                            Grid.Row="5"
+                            Orientation="Vertical"
+                            Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="50" Margin="5" TextChanged="TextBoxName_TextChanged"></TextBox>
+                        <Label Foreground="White">Filter by name</Label>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="50" Margin="5" TextChanged="TextBoxType_TextChanged"></TextBox>
+                        <Label Foreground="White">Filter by type</Label>
+                    </StackPanel>
 
                 </StackPanel>
             </Grid>

@@ -1,3 +1,5 @@
+
+
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'CookbookDatabase')
 CREATE DATABASE CookbookDatabase
 GO
@@ -5,8 +7,6 @@ GO
 USE CookbookDatabase
 GO
 
-IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblIngredientRecipe')
-drop table tblIngredientRecipe
 IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblIngredients')
 drop table tblIngredients
 IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblShoppingList')
@@ -15,7 +15,10 @@ IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblRecipe')
 drop table tblRecipe
 IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblPerson')
 drop table tblPerson
-
+IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblPersonRecipe')
+drop table tblPersonRecipe
+IF EXISTS (SELECT name FROM sys.sysobjects WHERE name = 'tblIngredientRecipe')
+drop table tblIngredientRecipe
 
 CREATE TABLE tblPerson
 (
@@ -40,20 +43,18 @@ DateCreated date
 CREATE TABLE tblIngredients
 (
 IngredientID int primary key identity (1,1),
-IngredientName nvarchar(50),
-Ammount int,
-Recipe int FOREIGN KEY REFERENCES tblRecipe(RecipeID),
+IngredientName nvarchar(50)
+
 )
 
-CREATE TABLE tblShoppingList
-(
-IngredientID int primary key identity (1,1),
-IngredientName nvarchar(50),
-Ammount int,
-Owned bit default(0),
-Recipe int FOREIGN KEY REFERENCES tblRecipe(RecipeID),
-Person int FOREIGN KEY REFERENCES tblPerson(PersonID)
-)
+ 
+
+CREATE TABLE tblPersonRecipe (
+   
+	PersonID int FOREIGN KEY REFERENCES tblPerson(PersonID),
+	RecipeID int FOREIGN KEY REFERENCES tblRecipe(RecipeID)  ,
+	primary key(PersonID,RecipeID)
+);
 
 CREATE TABLE tblIngredientRecipe (
    
@@ -61,6 +62,22 @@ CREATE TABLE tblIngredientRecipe (
 	RecipeID int FOREIGN KEY REFERENCES tblRecipe(RecipeID)  ,
 	primary key(IngredientID,RecipeID)
 );
+
+ GO
+CREATE VIEW vwRecipe 
+AS
+
+SELECT   dbo.tblRecipe.RecipeID ,dbo.tblRecipe.RecipeName,
+         dbo.tblRecipe.RecipeType ,dbo.tblRecipe.IntendedFor,
+		 dbo.tblRecipe.Description ,dbo.tblRecipe.DateCreated ,        
+		 dbo.tblPerson.PersonID,dbo.tblPerson.FirstName,
+         dbo.tblPerson.LastName,dbo.tblPerson.Username
+		 
+FROM            dbo.tblRecipe INNER JOIN
+            dbo.tblPerson ON dbo.tblRecipe.Author = dbo.tblPerson.PersonID  
+			 
+           
+GO
 
 USE CookbookDatabase
 GO
@@ -76,3 +93,7 @@ INSERT INTO tblIngredients (IngredientName) VALUES ('Cheese')
 INSERT INTO tblIngredients (IngredientName) VALUES ('Egg')
 INSERT INTO tblIngredients (IngredientName) VALUES ('Ham')
 INSERT INTO tblIngredients (IngredientName) VALUES ('Flour')
+
+select * from tblRecipe;
+select * from tblIngredientRecipe;
+select * from tblPersonRecipe;

@@ -10,6 +10,7 @@ namespace Cookbook.DataAccess
     interface IPersonService
     {
         tblPerson GetUserByUserNameAndPass(string userName, string password);
+        tblPerson GetUserByUserName(string userName);
         tblPerson AddUser(tblPerson user);
     }
 }

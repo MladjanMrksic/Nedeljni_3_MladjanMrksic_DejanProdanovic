@@ -13,7 +13,7 @@ namespace Cookbook.DataAccess
         {
             try
             {
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
 
                     tblPerson newUser = new tblPerson();
@@ -36,11 +36,34 @@ namespace Cookbook.DataAccess
             }
         }
 
+        public tblPerson GetUserByUserName(string userName)
+        {
+            try
+            {
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
+                {
+
+
+                    tblPerson user = (from x in context.tblPersons
+                                      where x.Username == userName 
+                                      
+                                      select x).First();
+
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
         public tblPerson GetUserByUserNameAndPass(string userName, string password)
         {
             try
             {
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
 
 

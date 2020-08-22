@@ -14,8 +14,9 @@ namespace Cookbook.DataAccess
         {
             try
             {
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
+
                     tblRecipe newRecipe = new tblRecipe
                     {
                         RecipeName = recipe.RecipeName,
@@ -24,9 +25,9 @@ namespace Cookbook.DataAccess
                         Author = recipe.Author,
                         Description = recipe.Description,
                         DateCreated = recipe.DateCreated,
-                        tblIngredients = recipe.tblIngredients,
-                        tblPerson = recipe.tblPerson,
-                        tblShoppingLists = recipe.tblShoppingLists
+
+
+
                     };
                     context.tblRecipes.Add(newRecipe);
                     context.SaveChanges();
@@ -45,22 +46,18 @@ namespace Cookbook.DataAccess
         {
             try
             {
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
-                    List < tblIngredient > list = (from x in context.tblIngredients where x.tblRecipe.RecipeID == ID select x).ToList();
-                    foreach (var i in list)
-                    {
-                        context.tblIngredients.Remove(i);
-                    }
+                    
                     context.tblRecipes.Remove((from x in context.tblRecipes
                                                where x.RecipeID == ID
-                                               select x).FirstOrDefault());                    
+                                               select x).FirstOrDefault());
                     context.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());               
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
             }
         }
 
@@ -68,9 +65,26 @@ namespace Cookbook.DataAccess
         {
             try
             {
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
                     return (from x in context.tblRecipes
+                            select x).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        public List<vwRecipe> GetAllvwRecipes()
+        {
+            try
+            {
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
+                {
+                    return (from x in context.vwRecipes
                             select x).ToList();
                 }
             }
@@ -85,7 +99,7 @@ namespace Cookbook.DataAccess
         {
             try
             {
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
                     return (from x in context.tblRecipes
                             where x.RecipeID == ID
@@ -103,12 +117,18 @@ namespace Cookbook.DataAccess
         {
             try
             {
-                using (CookbookDatabaseEntities context = new CookbookDatabaseEntities())
+                using (CookbookDatabaseEntities1 context = new CookbookDatabaseEntities1())
                 {
                     tblRecipe recipe = (from x in context.tblRecipes
                                         where x.RecipeID == Updated.RecipeID
                                         select x).First();
-                    recipe = Updated;
+                    recipe.RecipeName = Updated.RecipeName;
+                    recipe.DateCreated = Updated.DateCreated;
+                    recipe.IntendedFor = Updated.IntendedFor;
+                    recipe.Description = Updated.Description;
+                    recipe.RecipeType = Updated.RecipeType;
+                    recipe.tblIngredients = Updated.tblIngredients;
+                    recipe.Author = Updated.Author;
                     context.SaveChanges();
                     MessageBox.Show("Recipe successfully updated!", "Updated", MessageBoxButton.OK, MessageBoxImage.Information);
                     return recipe;

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cookbook.View"
         mc:Ignorable="d"
-        Title="AddIngredientsView" Height="450" Width="800" Background="Orange" WindowStartupLocation="CenterScreen">
+        Title="AddIngredientsView"  Height="500" Width="800" 
+        Background="Orange" WindowStartupLocation="CenterScreen">
     <Grid>
         <Border Background="#2e3137" CornerRadius="20" Margin="20">
             <Grid>
@@ -35,72 +36,61 @@
                 <StackPanel  Grid.Column="2" Grid.Row="2" Orientation="Vertical" Margin="10" >
                     <CheckBox Width="130" Name="Milk"
                               Content="Milk" Foreground="White"
-                              Command="{Binding Path=ChooseMilk}" Margin="10"
-                    CommandParameter="{Binding ElementName=Milk, Path=IsChecked}">
+                             IsChecked="{Binding Milk, UpdateSourceTrigger=PropertyChanged}" >
 
                     </CheckBox>
                     <CheckBox Width="130" Name="Salt"
                               Content="Salt"
                               Foreground="White"
-                              Command="{Binding Path=ChooseSalt}" Margin="10"
-                    CommandParameter="{Binding ElementName=Salt, Path=IsChecked}">
+                              IsChecked="{Binding Salt, UpdateSourceTrigger=PropertyChanged}" >
                     </CheckBox>
                     <CheckBox Width="130" Name="Sugar"
                               Content="Sugar"
                               Foreground="White"
-                              Command="{Binding Path=ChooseSugar}" Margin="10"
-                    CommandParameter="{Binding ElementName=Sugar, Path=IsChecked}">
+                             IsChecked="{Binding Sugar, UpdateSourceTrigger=PropertyChanged}" >
                     </CheckBox>
                     <CheckBox Width="130" Name="Tomato"
                               Content="Tomato"
                               Foreground="White"
-                              Command="{Binding Path=ChooseTomato}" Margin="10"
-                    CommandParameter="{Binding ElementName=Tomato, Path=IsChecked}">
+                             IsChecked="{Binding Tomato, UpdateSourceTrigger=PropertyChanged}" >
                     </CheckBox>
                     <CheckBox Width="130" Name="Mayonnaise"
                               Content="Mayonnaise"
                               Foreground="White"
-                              Command="{Binding Path=ChooseMayonnaise}" Margin="10"
-                    CommandParameter="{Binding ElementName=Mayonnaise, Path=IsChecked}">
+                              IsChecked="{Binding Mayo, UpdateSourceTrigger=PropertyChanged}" >
                     </CheckBox>
                     <CheckBox Width="130" Name="Mushroom"
                               Content="Mushroom"
                               Foreground="White"
-                              Command="{Binding Path=ChooseMushroom}" Margin="10"
-                    CommandParameter="{Binding ElementName=Mushroom, Path=IsChecked}">
+                              IsChecked="{Binding Mushrooms, UpdateSourceTrigger=PropertyChanged}" >
                     </CheckBox>
                 </StackPanel>
                 <StackPanel  Grid.Column="3" Grid.Row="2" Orientation="Vertical" Margin="10" >
                     <CheckBox Width="130" Name="Ketchup"
                               Content="Ketchup" Foreground="White"
-                              Command="{Binding Path=ChooseKetchup}" Margin="10"
-                    CommandParameter="{Binding ElementName=Ketchup, Path=IsChecked}">
+                              IsChecked="{Binding Ketchup, UpdateSourceTrigger=PropertyChanged}" >
 
                     </CheckBox>
                     <CheckBox Width="130" Name="Cheese"
                               Content="Cheese"
                               Foreground="White"
-                              Command="{Binding Path=ChooseCheese}" Margin="10"
-                    CommandParameter="{Binding ElementName=Cheese, Path=IsChecked}">
+                              IsChecked="{Binding Cheese, UpdateSourceTrigger=PropertyChanged}" >
 
                     </CheckBox>
                     <CheckBox Width="130" Name="Egg"
                               Content="Egg"
                               Foreground="White"
-                              Command="{Binding Path=ChooseEgg}" Margin="10"
-                    CommandParameter="{Binding ElementName=Egg, Path=IsChecked}">
+                              IsChecked="{Binding Egg, UpdateSourceTrigger=PropertyChanged}" >
                     </CheckBox>
                     <CheckBox Width="130" Name="Ham"
                               Content="Ham"
                               Foreground="White"
-                              Command="{Binding Path=ChooseHam}" Margin="10"
-                    CommandParameter="{Binding ElementName=Ham, Path=IsChecked}">
+                              IsChecked="{Binding Ham, UpdateSourceTrigger=PropertyChanged}" >
                     </CheckBox>
                     <CheckBox Width="130" Name="Flour"
                               Content="Flour"
                               Foreground="White"
-                              Command="{Binding Path=ChooseFlour}" Margin="10"
-                    CommandParameter="{Binding ElementName=Flour, Path=IsChecked}">
+                              IsChecked="{Binding Flour, UpdateSourceTrigger=PropertyChanged}" >
                     </CheckBox>
                 </StackPanel>
                 <StackPanel Grid.Column="3" Grid.Row="5" Orientation="Horizontal">
@@ -117,7 +107,7 @@
                             Width="50" Height="30" 
                             HorizontalAlignment="Center" 
                             Margin="0,0,20,0"
-                Command="{Binding Close, UpdateSourceTrigger=PropertyChanged}" 
+                Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}" 
                             FontWeight="Bold"/>
 
                 </StackPanel>
